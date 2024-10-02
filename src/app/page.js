@@ -6,8 +6,7 @@
 // import { signOut } from '@/utils/auth'; // anything in the src dir, you can use the @ instead of relative paths
 import { useAuth } from '@/utils/context/authContext';
 import { useEffect, useState } from 'react';
-
-const dbUrl = process.env.NEXT_PUBLIC_FIREBASE_DATABASE_URL;
+import { postFact, updateFact } from '../api/facts';
 
 function Home() {
   const [useLessFact, setUselesFact] = useState({});
@@ -26,15 +25,9 @@ function Home() {
       text: useLessFact.text,
     };
 
-    await fetch(`${dbUrl}/response${val}.json`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(obj),
-    });
+    const response = await postFact(obj, val);
+    await updateFact(response.name, val);
 
-    console.log(boolean, obj);
     fetchFact();
     return obj;
   };
