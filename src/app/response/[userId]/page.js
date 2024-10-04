@@ -4,7 +4,7 @@ import FactCard from '../../../components/Card';
 import { readFacts } from '../../../api/facts';
 
 // eslint-disable-next-line react/prop-types
-export default async function ResponseYesPage({ params, searchParams }) {
+export default async function ResponsePage({ params, searchParams }) {
   const facts = await readFacts(params.userId, searchParams.value);
 
   return (
@@ -17,7 +17,7 @@ export default async function ResponseYesPage({ params, searchParams }) {
   );
 }
 
-ResponseYesPage.propTypes = {
+ResponsePage.propTypes = {
   params: PropTypes.string.isRequired,
   searchParams: PropTypes.string.isRequired,
 };
